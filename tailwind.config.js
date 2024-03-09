@@ -10,6 +10,9 @@ export default {
         primary: {
           400: "#A4FFAF",
         },
+        accent: {
+          400: "#FACD68",
+        },
         neutral: {
           100: "#E6E5EA",
           400: "#5B5867",

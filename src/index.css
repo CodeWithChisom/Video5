@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .default-flex {
+    @apply flex items-center;
+  }
+
+  .my-flex {
+    @apply default-flex justify-between gap-8;
+  }
+}
+
+.range-slider {
+  background: #0f0e14;
+}
+
+.range-slider__range {
+  background: #a4ffaf !important;
+  left: 0.3% !important;
+  border-radius: 100vmax 0 0 100vmax !important;
+}
+
+.range-slider__thumb {
+  background: #e6e5ea !important;
+  border: 2px solid transparent !important;
+}
+
+.range-slider__thumb:is(:hover, :focus-visible) {
+  background: #0f0e14 !important;
+  border-color: #a4ffaf !important;
+}
+
+.range-slider__thumb[data-lower] {
+  display: none !important;
+}

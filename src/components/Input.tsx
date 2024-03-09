@@ -1,6 +1,10 @@
 import { FaRegCopy } from "react-icons/fa";
 
-export default function Input() {
+type InputProps = {
+  password: string;
+};
+
+export default function Input({ password }: InputProps) {
   return (
     <div className="bg-neutral-600 px-4 py-3 my-flex mb-4">
       <input
@@ -8,6 +12,7 @@ export default function Input() {
         placeholder="P4$5W0rD!"
         className="bg-transparent outline-none placeholder:text-neutral-400 placeholder:font-bold"
         readOnly
+        value={password}
       />
       <button className="text-primary-400 hover:text-neutral-100 focus-visible:text-neutral-100">
         <FaRegCopy />

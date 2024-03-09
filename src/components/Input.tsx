@@ -1,3 +1,4 @@
+import { useSnackbar } from "notistack";
 import { FaRegCopy } from "react-icons/fa";
 
 type InputProps = {
@@ -5,6 +6,31 @@ type InputProps = {
 };
 
 export default function Input({ password }: InputProps) {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleCopy = () => {
+    if (!password) {
+      enqueueSnackbar("Nothing to copy", {
+        variant: "info",
+      });
+      return;
+    }
+
+    navigator.clipboard
+      .writeText(password)
+      .then(() => {
+        enqueueSnackbar("Copied to clipboard!", {
+          variant: "success",
+        });
+      })
+      .catch((e) => {
+        console.log(e.message);
+        enqueueSnackbar("Failed to copy", {
+          variant: "error",
+        });
+      });
+  };
+
   return (
     <div className="bg-neutral-600 px-4 py-3 my-flex mb-4">
       <input
@@ -14,7 +40,10 @@ export default function Input({ password }: InputProps) {
         readOnly
         value={password}
       />
-      <button className="text-primary-400 hover:text-neutral-100 focus-visible:text-neutral-100">
+      <button
+        onClick={handleCopy}
+        className="text-primary-400 hover:text-neutral-100 focus-visible:text-neutral-100"
+      >
         <FaRegCopy />
       </button>
     </div>

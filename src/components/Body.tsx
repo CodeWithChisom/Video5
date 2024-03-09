@@ -2,6 +2,7 @@ import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import { FaArrowRight } from "react-icons/fa";
 import { Dispatch, SetStateAction, useState } from "react";
+import { useSnackbar } from "notistack";
 
 type BodyProps = {
   setPassword: Dispatch<SetStateAction<string>>;
@@ -13,6 +14,7 @@ export default function Body({ setPassword }: BodyProps) {
   const [lower, setLower] = useState(false);
   const [number, setNumber] = useState(false);
   const [symbol, setSymbol] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const getRandomLower = () => {
     const lowerCaseLetter = Math.floor(Math.random() * 26) + 97;
@@ -46,7 +48,19 @@ export default function Body({ setPassword }: BodyProps) {
       (elem) => Object.values(elem)[0]
     );
 
-    if (selected.length === 0) return;
+    if (value[1] === 0) {
+      enqueueSnackbar("Character length must be above zero", {
+        variant: "info",
+      });
+      return;
+    }
+
+    if (selected.length === 0) {
+      enqueueSnackbar("Please select at least one character type", {
+        variant: "info",
+      });
+      return;
+    }
 
     setPassword("");
     for (let i = 0; i < value[1]; i++) {
